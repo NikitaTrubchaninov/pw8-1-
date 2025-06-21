@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
 project(TicTacToe)
 
-set(USE_SHARED_LIB OFF CACHE BOOL "Build shared library")
+# Опція для вибору типу бібліотеки (ON - динамічна, OFF - статична)
+option(BUILD_SHARED_LIBS "Build as a shared library" OFF)
 
-if(USE_SHARED_LIB)
-    set(LIB_TYPE SHARED)
-else()
-    set(LIB_TYPE STATIC)
-endif()
-
-add_library(libttc ${LIB_TYPE}
+# Додаємо бібліотеку
+add_library(tictactoe_lib STATIC
+    include/board.hpp
+    include/game.hpp
+    include/moves.hpp
+    include/tictactoe.hpp
     src/board.cpp
     src/game.cpp
     src/moves.cpp
 )
 
-target_include_directories(libttc PUBLIC 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+# Вказуємо, де шукати заголовки
+target_include_directories(tictactoe_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable(TicTacToe src/main.cpp)
-target_link_libraries(TicTacToe libttc)
+# Додаємо виконуваний файл
+add_executable(tictactoe src/main.cpp)
+target_link_libraries(tictactoe PRIVATE tictactoe_lib)
