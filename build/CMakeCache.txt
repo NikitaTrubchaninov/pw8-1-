@@ -14,8 +14,8 @@
 # EXTERNAL cache entries
 ########################
 
-//No help, variable specified on the command line.
-BUILD_SHARED_LIBS:UNINITIALIZED=OFF
+//Build as a shared library
+BUILD_SHARED_LIBS:BOOL=OFF
 
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/lib.exe
